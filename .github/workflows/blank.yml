@@ -1,0 +1,23 @@
+name: CI
+on:
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: github-task-job
+        if: ${{ contains(runner.labels, 'ubuntu-latest') }}
+        run: echo "run on the latest version of Ubuntu is $GITHUB_ACTIONS"
+
+      - name: show the name of the branch and repository
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Branch: $GITHUB_REF_NAME"
+      - name: initiated event the workflow
+        run: |
+          echo "Event: $GITHUB_EVENT_NAME"
+      
