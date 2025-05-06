@@ -5,7 +5,7 @@ env:
 on:
   pull_request:
     branches: [ "main" ]
-
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,13 +13,12 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: github-task-job
-        if: ${{ contains(runner.labels, 'ubuntu-latest') }}
-        run: echo "run on the latest version of Ubuntu is $GITHUB_ACTIONS"
+        run: echo "run on the latest version of ${{ github.label }} is ${{ env.GITHUB_ACTIONS }}"
 
       - name: show the name of the branch and repository
         run: |
           echo "Repository: ${{ github.repository }}"
-          echo "Branch: ${{ github.ref }}"
+          echo "Branch: ${{ github.ref_name }}"
       - name: initiated event name the workflow
         run: |
           echo "Event: ${{ github.event_name }}"
