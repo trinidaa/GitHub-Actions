@@ -1,4 +1,7 @@
 name: CI
+
+env:
+  GITHUB_ACTIONS: true
 on:
   pull_request:
     branches: [ "main" ]
@@ -15,9 +18,9 @@ jobs:
 
       - name: show the name of the branch and repository
         run: |
-          echo "Repository: $GITHUB_REPOSITORY"
-          echo "Branch: $GITHUB_REF_NAME"
-      - name: initiated event the workflow
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref }}"
+      - name: initiated event name the workflow
         run: |
-          echo "Event: $GITHUB_EVENT_NAME"
+          echo "Event: ${{ github.event_name }}"
       
